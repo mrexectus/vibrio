@@ -1,9 +1,18 @@
-const WEBHOOK_URL = "https://hook.eu1.make.com/rncx7w4lyaw4a7yqnd4n2feel90qy85j"; 
+// FINAL VIBRIO SCRIPT – MAKE WEBHOOK ENTEGRASYONU
+
+const WEBHOOK_URL = "https://hook.eu1.make.com/rncx7w4lyaw4a7yqnd4n2feel90qy85j";
 
 async function sendToWebhook() {
-    const message = document.getElementById("userMessage").value;
+    const messageInput = document.getElementById("userMessage");
+    const responseBox = document.getElementById("responseBox");
 
-    document.getElementById("responseBox").innerHTML = "🔮 Vibrio düşünüyor...";
+    const message = messageInput.value.trim();
+    if (!message) {
+        alert("Lütfen bir mesaj yaz.");
+        return;
+    }
+
+    responseBox.innerHTML = "🔮 Vibrio düşünüyor...";
 
     try {
         const response = await fetch(WEBHOOK_URL, {
@@ -14,36 +23,26 @@ async function sendToWebhook() {
             body: JSON.stringify({ message })
         });
 
-        // CEVABI TEXT OLARAK AL (ÖNEMLİ!)
         const text = await response.text();
 
-        // EKRANA BAS
-        document.getElementById("responseBox").innerHTML = "✨ " + text;
+        let data;
+        try {
+            data = JSON.parse(text);
+        } catch (e) {
+            console.error("JSON parse hatası:", e, text);
+            responseBox.innerHTML =
+                "<p style='color:red;'>Sunucudan beklenmeyen veri geldi.</p>";
+            return;
+        }
+
+        responseBox.innerHTML = `
+            <p><strong>Enerji:</strong> ${data.energy}</p>
+            <p><strong>Yorum:</strong> ${data.comment}</p>
+        `;
 
     } catch (error) {
-        document.getElementById("responseBox").innerHTML =
-            "❌ Hata: " + error.message;
+        console.error("Hata:", error);
+        responseBox.innerHTML =
+            "<p style='color:red;'>Bir hata oluştu. Lütfen tekrar dene.</p>";
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
