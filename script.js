@@ -1,5 +1,5 @@
 // Vibrio frontend – feminen/modern arayüz + hızlı sorular + fotoğraf seçimi
-const WEBHOOK_URL = "https://hook.eu1.make.com/rncx7w4lyaw4a7yqnd4n2feel90qy85j";
+const WEBHOOK_URL = "https://hook.eu1.make.com/753dkrglgfpiuzteo4fxjhdgedrpdeiw";
 
 let selectedImageData = null;
 
