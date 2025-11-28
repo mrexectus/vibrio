@@ -1,35 +1,50 @@
-.card {
+body {
+    font-family: Arial, sans-serif;
+    background: #fafafa;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.title {
+    position: absolute;
+    top: 20px;
+    font-size: 28px;
+    color: #333;
+}
+
+.container {
+    width: 100%;
     max-width: 450px;
-    margin: 80px auto;
-    padding: 25px;
-    background: #1a1a1a;
-    color: white;
-    border-radius: 12px;
-    box-shadow: 0 0 20px rgba(255, 0, 150, 0.4);
 }
 
 textarea {
     width: 100%;
     height: 120px;
-    padding: 10px;
+    padding: 12px;
+    font-size: 16px;
     border-radius: 8px;
-    border: none;
-    margin-bottom: 15px;
-    resize: none;
+    border: 1px solid #ddd;
 }
 
 button {
     width: 100%;
     padding: 12px;
+    margin-top: 10px;
+    background: #6c5ce7;
+    color: white;
     border: none;
     border-radius: 8px;
-    background: linear-gradient(90deg, #ff2a6d, #7b2ff7);
-    color: white;
-    font-size: 16px;
+    font-size: 18px;
     cursor: pointer;
 }
 
-#responseBox {
+.responseBox {
     margin-top: 20px;
-    font-size: 16px;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    min-height: 80px;
+    line-height: 1.5;
 }

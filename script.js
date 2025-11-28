@@ -1,47 +1,36 @@
-// FINAL VIBRIO SCRIPT – MAKE WEBHOOK ENTEGRASYONU
-
+// FINAL VIBRIO SCRIPT (DÜZELTİLMİŞ)
 const WEBHOOK_URL = "https://hook.eu1.make.com/rncx7w4lyaw4a7yqnd4n2feel90qy85j";
 
 async function sendToWebhook() {
-    const messageInput = document.getElementById("userMessage");
-    const responseBox = document.getElementById("responseBox");
+    const msg = document.getElementById("userMessage").value.trim();
+    const box = document.getElementById("responseBox");
+    if (!msg) return alert("Lütfen bir şey yaz.");
 
-    const message = messageInput.value.trim();
-    if (!message) {
-        alert("Lütfen bir mesaj yaz.");
-        return;
-    }
-
-    responseBox.innerHTML = "🔮 Vibrio düşünüyor...";
+    box.innerHTML = "🔮 Vibrio düşünüyor...";
 
     try {
-        const response = await fetch(WEBHOOK_URL, {
+        const res = await fetch(WEBHOOK_URL, {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ message })
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: msg })
         });
 
-        const text = await response.text();
+        const txt = await res.text();
 
         let data;
-        try {
-            data = JSON.parse(text);
-        } catch (e) {
-            console.error("JSON parse hatası:", e, text);
-            responseBox.innerHTML =
-                "<p style='color:red;'>Sunucudan beklenmeyen veri geldi.</p>";
+        try { 
+            data = JSON.parse(txt); 
+        } catch {
+            box.innerHTML = "<p style='color:red;'>Sunucudan beklenmeyen veri geldi.</p>";
             return;
         }
 
-        responseBox.innerHTML = 
-            "<p><strong>Enerji:</strong> " + data.energy + "</p>" +
-            "<p><strong>Yorum:</strong> " + data.comment + "</p>";
+        box.innerHTML = `
+            <p><strong>Enerji:</strong> ${data.score}</p>
+            <p><strong>Yorum:</strong> ${data.teaser}</p>
+        `;
 
-    } catch (error) {
-        console.error("Hata:", error);
-        responseBox.innerHTML =
-            "<p style='color:red;'>Bir hata oluştu. Lütfen tekrar dene.</p>";
+    } catch {
+        box.innerHTML = "<p style='color:red;'>Hata oluştu.</p>";
     }
 }
