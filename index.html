@@ -1,23 +1,78 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <title>Vibrio</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>Vibrio – İlişki Enerjisi</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="app">
+    <header class="app-header">
+      <h1 class="logo">VIBRIO</h1>
+      <p class="subtitle">
+        Mesajını veya durumunu yaz, istersen fotoğraf ekle. Vibrio sana enerji puanını
+        ve kısa, merak uyandıran bir yorum göndersin.
+      </p>
+    </header>
 
-    <h1 class="title">✨ Vibrio</h1>
-
-    <div class="container">
-        <textarea id="userMessage" placeholder="Bir şey yaz..."></textarea>
-        <button onclick="sendToWebhook()">Gönder</button>
-
-        <div id="responseBox" class="responseBox">
-            Henüz bir analiz yok.
+    <main class="card">
+      <section class="input-area">
+        <div class="quick-actions">
+          <button type="button" class="chip" data-template="Burç uyumumuzu analiz eder misin? Burçlarımız: ...">
+            💞 Burç uyumu
+          </button>
+          <button type="button" class="chip" data-template="İsim analizi yapar mısın? İsimlerimiz: ...">
+            🔤 İsim analizi
+          </button>
+          <button type="button" class="chip" data-template="Sevgilimle 20 yıl sonra ilişkimiz nasıl olur?">
+            🔮 20 yıl sonra biz
+          </button>
+          <button type="button" class="chip" data-template="Bu ilişkide ilgi seviyesi ve enerji kaç gibi görünüyor?">
+            ❤️‍🔥 İlgi skoru
+          </button>
+          <button type="button" class="chip" data-template="Mesajlardan gizlenen duyguları ve asıl niyeti analiz eder misin?">
+            🎭 Gizlenen duygular
+          </button>
         </div>
-    </div>
 
-    <script src="script.js"></script>
+        <textarea
+          id="userMessage"
+          class="message-input"
+          placeholder="Sevgilimle uyumumuz nasıl? Son konuşmamızda şunlar oldu..."
+        ></textarea>
+
+        <div class="image-row">
+          <label class="image-upload">
+            <input type="file" id="imageInput" accept="image/*" hidden />
+            <span>📎 Fotoğraf ekle</span>
+          </label>
+          <div id="imagePreview" class="image-preview hidden">
+            <img id="imagePreviewImg" alt="Seçilen fotoğraf önizlemesi" />
+            <button type="button" id="clearImage" class="clear-image">Kaldır</button>
+          </div>
+        </div>
+
+        <button id="sendBtn" class="primary-btn" type="button">
+          Vibrio’ya sor
+        </button>
+      </section>
+
+      <section id="responseBox" class="response-box">
+        <p class="placeholder">Henüz bir analiz yok. İlk sorunla başla ✨</p>
+      </section>
+
+      <section id="ctaSection" class="cta hidden">
+        <a id="ctaButton" class="cta-btn" href="#" target="_blank" rel="noopener noreferrer">
+          Detaylı ilişki raporunu gör
+        </a>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <small>Vibrio • deneme arayüzü – gerçek kişiler hakkında karar verirken her zaman kendi sezgine güven.</small>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
