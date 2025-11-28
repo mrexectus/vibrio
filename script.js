@@ -35,10 +35,9 @@ async function sendToWebhook() {
             return;
         }
 
-        responseBox.innerHTML = `
-            <p><strong>Enerji:</strong> ${data.energy}</p>
-            <p><strong>Yorum:</strong> ${data.comment}</p>
-        `;
+        responseBox.innerHTML = 
+            "<p><strong>Enerji:</strong> " + data.energy + "</p>" +
+            "<p><strong>Yorum:</strong> " + data.comment + "</p>";
 
     } catch (error) {
         console.error("Hata:", error);
