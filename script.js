@@ -1,32 +1,49 @@
+const WEBHOOK_URL = "https://hook.eu1.make.com/rncx7w4lyaw4a7yqnd4n2feel90qy85j"; 
+
 async function sendToWebhook() {
-    const message = document.getElementById("userMessage").value.trim();
+    const message = document.getElementById("userMessage").value;
 
-    if (!message) {
-        alert("Lütfen bir mesaj yaz.");
-        return;
-    }
-
-    // 🔥 BURAYA Make.com Webhook URL’in gelecek
-    const webhookURL = "https://hook.eu1.make.com/rncx7w4lyaw4a7yqnd4n2feel90qy85j";
+    document.getElementById("responseBox").innerHTML = "🔮 Vibrio düşünüyor...";
 
     try {
-        const response = await fetch(webhookURL, {
+        const response = await fetch(WEBHOOK_URL, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({
-                text: message
-            })
+            body: JSON.stringify({ message })
         });
 
-        const result = await response.json();
+        // CEVABI TEXT OLARAK AL (ÖNEMLİ!)
+        const text = await response.text();
 
-        document.getElementById("responseBox").innerHTML =
-            `<p><strong>Cevap:</strong> ${result.reply || "Yanıt alınamadı."}</p>`;
+        // EKRANA BAS
+        document.getElementById("responseBox").innerHTML = "✨ " + text;
 
     } catch (error) {
         document.getElementById("responseBox").innerHTML =
-            `<p style="color:red;"><strong>Hata:</strong> ${error.message}</p>`;
+            "❌ Hata: " + error.message;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
