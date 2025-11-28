@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIBRIO – Mini Analiz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="card">
+    <h2>VIBRIO</h2>
+    <p>Mesajını veya durumunu yaz, Vibrio sana enerji puanını ve kısa bir yorum göndersin.</p>
+
+    <textarea id="userMessage" placeholder="Bana geç cevap veriyor, sence ne hissediyor?"></textarea>
+
+    <button onclick="sendToWebhook()">Vibrio’ya sor</button>
+
+    <div id="responseBox"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

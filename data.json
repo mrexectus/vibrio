@@ -1,0 +1,26 @@
+function sendToWebhook() {
+    const message = document.getElementById("userMessage").value.trim();
+
+    if (!message) {
+        alert("Lütfen bir mesaj yaz.");
+        return;
+    }
+
+    const webhookURL = "https://hook.eu1.make.com/rncx7w4lyaw4a7yqnd4n2feel90qy85j";
+
+    fetch(webhookURL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: message })
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById("responseBox").innerHTML =
+            "<p><strong>Cevap:</strong> " + data.result + "</p>";
+    })
+    .catch(error => {
+        console.error("Hata:", error);
+        document.getElementById("responseBox").innerHTML =
+            "<p style='color: red;'>Bir hata oluştu.</p>";
+    });
+}
