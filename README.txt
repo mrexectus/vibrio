@@ -1,0 +1,1 @@
+Upload to GitHub root then Vercel deploy.
