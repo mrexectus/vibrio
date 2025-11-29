@@ -1,0 +1,8 @@
+{
+  "name": "vibrio",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "@playwright/browser-chromium": "^1.42.0"
+  }
+}
