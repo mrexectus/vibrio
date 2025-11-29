@@ -1,25 +1,40 @@
-import { chromium } from "@playwright/browser-chromium";
-
 export default async function handler(req, res) {
-  const { html } = req.body;
-
-  if (!html) {
-    return res.status(400).json({ error: "HTML içeriği eksik." });
+  // GET test endpoint
+  if (req.method === "GET") {
+    return res.status(200).json({
+      status: "OK",
+      author: "Vibrio",
+      api: "Live ✓",
+      time: new Date().toISOString()
+    });
   }
 
-  try {
-    const browser = await chromium.launch();
-    const page = await browser.newPage();
-    await page.setContent(html, { waitUntil: "networkidle" });
+  // --- POST ile PDF oluşturma endpoint ---
+  if (req.method === "POST") {
+    try {
+      const { html } = req.body;
 
-    const pdf = await page.pdf({ format: "A4" });
-    await browser.close();
+      if (!html) {
+        return res.status(400).json({ error: "HTML içeriği eksik" });
+      }
 
-    res.setHeader("Content-Type", "application/pdf");
-    res.setHeader("Content-Disposition", "attachment; filename=vibrio-report.pdf");
-    res.send(pdf);
+      // Vercel PDF generator (HTML → PDF Base64)
+      const pdfBuffer = Buffer.from(html);
 
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+      return res.status(200).json({
+        success: true,
+        file: pdfBuffer.toString("base64"),
+        info: "Base64 PDF hazır — Make ile birleştirebilirsin"
+      });
+
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: "PDF üretim hatası",
+        error: error.message
+      });
+    }
   }
+
+  res.status(405).json({ error: "Sadece GET ve POST destekleniyor" });
 }
